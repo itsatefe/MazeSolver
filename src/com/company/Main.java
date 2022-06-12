@@ -11,9 +11,11 @@ public class Main {
 
     public static void main(String[] args) {
         //read 2-D array from file
-        String mazePath = "C:\\Users\\Asus\\IdeaProjects\\Maze\\src\\com\\company\\array.txt";
-        String priorityPath = "C:\\Users\\Asus\\IdeaProjects\\Maze\\src\\com\\company\\priority.txt";
+        // C:\Users\Asus\IdeaProjects\Maze\src\com\company\array.txt
+        String mazePath = System.getProperty("user.dir")+"\\src\\com\\company\\array.txt";
+        String priorityPath =System.getProperty("user.dir")+"\\src\\com\\company\\priority.txt";
         int [][] myArray = ReadMaze(mazePath);
+        PrintMaze(myArray);
         int[] priority = ReadPriority(priorityPath);
         //System.out.println(Arrays.deepToString(new int[][]{priority}));
         MazeSolver ms = new MazeSolver(myArray,priority);
@@ -24,10 +26,30 @@ public class Main {
     }
     static void printSolution(char sol[][])
     {
+        System.out.println("--------solution---------");
+
         for (int i = 0; i < sol.length; i++) {
             for (int j = 0; j < sol[0].length; j++) {
                 if (sol[i][j] != '*')
                     sol[i][j] = '-';
+                System.out.print(
+                        " " + sol[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+
+    }
+    static void PrintMaze(int maze[][])
+    {
+        System.out.println("-------Maze--------");
+
+        char sol[][] = new char[maze.length][maze[0].length];
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[0].length; j++) {
+                if (maze[i][j] == 0)
+                    sol[i][j] = '-';
+                else sol[i][j] = '#';
                 System.out.print(
                         " " + sol[i][j] + " ");
             }
@@ -55,25 +77,25 @@ public class Main {
                     priority[i] = 0;
                     break;
                 case "NE":
-                    priority[i] = 1;
+                    priority[i] = 7;
                     break;
                 case "E":
-                    priority[i] = 2;
+                    priority[i] = 6;
                     break;
                 case "SE":
-                    priority[i] = 3;
+                    priority[i] = 5;
                     break;
                 case "S":
                     priority[i] = 4;
                     break;
                 case "SW":
-                    priority[i] = 5;
+                    priority[i] = 3;
                     break;
                 case "W":
-                    priority[i] = 6;
+                    priority[i] = 2;
                     break;
                 default:
-                    priority[i] = 7;
+                    priority[i] = 1;
             }
         }
         return priority;
