@@ -1,1 +1,1 @@
-Simple Maze solver unsing java with priority configuration
+Simple Maze solver implemented in java with priority configuration
